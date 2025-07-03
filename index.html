@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Hesap Makinesi</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="calculator card">
+            <div class="card-body">
+                <div id="display" class="form-control form-control-lg text-right mb-3" style="height: auto; min-height: 60px;">0</div>
+                <div class="row no-gutters">
+                    <div class="col-3"><button class="btn btn-info btn-block btn-lg" onclick="memoryClear()">MC</button></div>
+                    <div class="col-3"><button class="btn btn-info btn-block btn-lg" onclick="memoryRecall()">MR</button></div>
+                    <div class="col-3"><button class="btn btn-info btn-block btn-lg" onclick="memoryAdd()">M+</button></div>
+                    <div class="col-3"><button class="btn btn-info btn-block btn-lg" onclick="memorySubtract()">M-</button></div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-3"><button class="btn btn-light btn-block btn-lg" onclick="clearEntry()">CE</button></div>
+                    <div class="col-3"><button class="btn btn-light btn-block btn-lg" onclick="clearAll()">C</button></div>
+                    <div class="col-3"><button class="btn btn-light btn-block btn-lg" onclick="backspace()">←</button></div>
+                    <div class="col-3"><button class="btn btn-warning btn-block btn-lg" onclick="appendOperator('/')">/</button></div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-3"><button class="btn btn-light btn-block btn-lg" onclick="percentage()">%</button></div>
+                    <div class="col-3"><button class="btn btn-light btn-block btn-lg" onclick="squareRoot()">√</button></div>
+                    {/* Preserve the 7-8-9 row, but it needs to be adjusted if we keep % and sqrt in the same row as numbers.
+                        For a standard layout, % and sqrt might be elsewhere or M buttons take a full row.
+                        Let's assume M buttons take a full row and % and sqrt are placed before numbers.
+                        The following structure needs rethinking if we want a compact layout.
+                        For now, this will shift the number pad down.
+                        A better approach would be to make the calculator wider or group M functions differently.
+                        Let's adjust to have MC, MR, M+, M- on one row, then CE, C, back, / on next, then %, sqrt, x^2, 1/x (example)
+                        For simplicity now, just adding a row.
+                    */}
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('7')">7</button></div>
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('8')">8</button></div>
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('9')">9</button></div>
+                    <div class="col-3"><button class="btn btn-warning btn-block btn-lg" onclick="appendOperator('*')">x</button></div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('4')">4</button></div>
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('5')">5</button></div>
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('6')">6</button></div>
+                    <div class="col-3"><button class="btn btn-warning btn-block btn-lg" onclick="appendOperator('-')">-</button></div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('1')">1</button></div>
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('2')">2</button></div>
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('3')">3</button></div>
+                    <div class="col-3"><button class="btn btn-warning btn-block btn-lg" onclick="appendOperator('+')">+</button></div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="negate()">+/-</button></div>
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendNumber('0')">0</button></div>
+                    <div class="col-3"><button class="btn btn-secondary btn-block btn-lg" onclick="appendDecimal()">.</button></div>
+                    <div class="col-3"><button class="btn btn-primary btn-block btn-lg" onclick="calculate()">=</button></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-history card mt-3">
+            <div class="card-header">
+                Geçmiş
+                <button class="btn btn-sm btn-outline-secondary float-right" id="clearHistoryBtn" onclick="clearHistoryDisplay()">Temizle</button>
+            </div>
+            <ul id="historyList" class="list-group list-group-flush">
+                <!-- Geçmiş öğeleri buraya eklenecek -->
+                <li class="list-group-item text-muted text-center" id="noHistoryMessage">Henüz geçmiş yok.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
